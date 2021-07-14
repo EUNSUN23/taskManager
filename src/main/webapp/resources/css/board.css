@@ -1,0 +1,79 @@
+.boardContainer{
+	position:relative;
+	width:50%;
+	margin:50px auto;
+	padding:20px 20px 30px;
+	box-shadow: rgba(0, 0, 0, 0.1) 0px 6px 24px 0px, rgba(0, 0, 0, 0.13) 0px 0px 0px 1px;
+}
+
+
+
+#submitDelete{
+	display:none;
+background-color:transparent;
+color:red;
+border:none;
+font-size:14px;
+padding:10px 0 0 0;
+}
+
+.deleteCheck{
+	transform:translateY(5px);
+}
+
+.emp-delete-container{
+	padding-top:10px;
+	display:none;
+}
+
+.emp-info div {
+	display:flex;
+	background-color:#e8e8e8;
+	font-size:12px;
+	padding:2px;
+	
+}
+
+.emp-info div span {
+	flex:1;
+}
+
+
+#emp-board{
+	padding-top:16px;
+}
+
+.deleteEmp {
+	
+	background-color:#F62841;
+}
+
+.deleteEmp:hover{
+	background-color:#F62841;
+
+}
+
+.deleteEmp:focus{
+	background-color:#F62841;
+
+}
+
+.btn:focus{
+	outline:none;
+
+}
+
+.empNoSelect{
+	font-weight:bold;
+	font-size:13px;
+	padding-top:2px;
+	transform:translateY(2px);
+}
+
+
+.id{
+	position:absolute;
+	top:30px;
+	right:25px;
+	font-size:16px;
+}
