@@ -3,6 +3,7 @@ package com.demo2.boardController;
 import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -25,6 +26,8 @@ public class BoardController {
 		
 		// jsp에서 사용할 데이터 세팅 -> request에 담긴다.
 		String id = request.getParameter("id");
+		HttpSession session = request.getSession();
+		session.setAttribute("id", id);
 		System.out.println("get req, empMap.get(id): "+ EmpDataUtil.empMap.keySet());
 		mav1.addObject("employeeData", EmpDataUtil.empMap);
 		mav1.addObject("id", id);
@@ -37,6 +40,7 @@ public class BoardController {
 	public ModelAndView reviseEmpInfo(HttpServletRequest request) {
 		
 		ModelAndView mavPost = new ModelAndView();
+		HttpSession session = request.getSession();
 
 		// 찾아야할 jsp 정보 세팅
 		mavPost.setViewName("board");
@@ -47,12 +51,14 @@ public class BoardController {
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
 		String task = request.getParameter("task");
+		String id = (String)session.getAttribute("id");
 
 		EmpDataUtil.reviseEmpInf(empNo, name, phone, task);
 			
 		System.out.println("empMap: "+EmpDataUtil.empMap.toString());
 
 		mavPost.addObject("employeeData", EmpDataUtil.empMap);
+		mavPost.addObject("id", id);
 
 		return mavPost;
 	}
@@ -62,7 +68,7 @@ public class BoardController {
 	public ModelAndView reviseEmpTodo(HttpServletRequest request) {
 		
 		ModelAndView mavPost = new ModelAndView();
-
+		HttpSession session = request.getSession();
 		// 찾아야할 jsp 정보 세팅
 		mavPost.setViewName("board");
 
@@ -73,11 +79,13 @@ public class BoardController {
 		String empNo = request.getParameter("empNo");
 		int todoIdx = Integer.parseInt(request.getParameter("todoIdx"));
 		String todoText = request.getParameter("todoText");
+		String id = (String)session.getAttribute("id");
 
 		EmpDataUtil.reviseEmpTodo(empNo, todoIdx, todoText);
 
-		mavPost.addObject("employeeData", EmpDataUtil.empMap.toString());
-
+		mavPost.addObject("employeeData", EmpDataUtil.empMap);
+		mavPost.addObject("id", id);
+		
 		return mavPost;
 	}
 	
@@ -86,18 +94,23 @@ public class BoardController {
 	public ModelAndView deleteBoard(HttpServletRequest request) {
 		
 		ModelAndView mavPost = new ModelAndView();
-
+		HttpSession session = request.getSession();
 		// 찾아야할 jsp 정보 세팅
 		mavPost.setViewName("board");
 
 		// jsp에서 사용할 데이터 세팅 -> request에 담긴다.
 
-
-		String empNo = request.getParameter("empNo");
 		
-		EmpDataUtil.deleteEmployee(empNo);
+		String id = (String)session.getAttribute("id");
+		String[] empNos = request.getParameterValues("empNo");
+		
+		for(int i = 0; i<empNos.length; i++) {
+			EmpDataUtil.deleteEmployee(empNos[i]);
+		}
+		
 
 		mavPost.addObject("employeeData", EmpDataUtil.empMap);
+		mavPost.addObject("id",id);
 		
 
 		return mavPost;
@@ -108,7 +121,7 @@ public class BoardController {
 	public ModelAndView addBoard(HttpServletRequest request) {
 		
 		ModelAndView mavPost = new ModelAndView();
-
+		HttpSession session = request.getSession();
 		// 찾아야할 jsp 정보 세팅
 		mavPost.setViewName("board");
 
@@ -119,14 +132,18 @@ public class BoardController {
 		
 		System.out.println("empNo/add-emp: "+empNo);
 		
+		
+		String id = (String)session.getAttribute("id");
 		String name = request.getParameter("name");
 		String phone = request.getParameter("phone");
 		String task = request.getParameter("task");
 		
+		
+		
 		EmpDataUtil.addEmployee(empNo, name, phone, task);
 
 		mavPost.addObject("employeeData", EmpDataUtil.empMap);
-		
+		mavPost.addObject("id",id);
 
 		return mavPost;
 	}

@@ -3,6 +3,27 @@
 const deleteEmp = document.querySelector(".deleteEmp");
 const deleteContainer = document.querySelectorAll(".emp-delete-container");
 const submitDelete = document.querySelector("#submitDelete");
+const deleteChecker = document.querySelectorAll(".deleteCheck");
+const empListHeader = document.querySelectorAll(".list-group-item");
+
+for(let j = 0; j<empListHeader.length; j++){
+	const empHeader = empListHeader[j];
+	empHeader.addEventListener("click",function(e){
+		if(empHeader.classList.contains("selected")){
+			empHeader.classList.remove("selected");
+		}else{
+			empHeader.classList.add("selected");
+		}
+	})
+}
+
+
+const initDeleteCheck = () => {
+	for(let i = 0; i<deleteChecker.length; i++){
+		deleteChecker[i].checked = false;
+	}
+	
+}
 
 deleteEmp.addEventListener("click", function(e) {
 
@@ -18,7 +39,7 @@ deleteEmp.addEventListener("click", function(e) {
 		}
 		deleteEmp.innerHTML = "멤버 삭제"
 		submitDelete.style.display = "none";
-
+		initDeleteCheck();
 	}
 
 });
