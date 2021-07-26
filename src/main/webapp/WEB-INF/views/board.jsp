@@ -57,26 +57,26 @@
 				<div id="accordion">
 					<div class="card">
 						<div class="emp-delete-container">
-							<input type="checkbox" name="empNo" value="${emp.key}"
+							<input type="checkbox" name="empNo" value="${emp.empno}"
 								class="deleteCheck" id="empNo" /> <label for="#empNo"
 								class="empNoSelect">선택</label>
 						</div>
 						<!-- 아코디언 헤더  start -->
 						<div class="card-header">
 							<a class="card-link list-group-item list-group-item-action"
-								data-toggle="collapse" href="#${emp.key}"> ${emp.value.name}
+								data-toggle="collapse" href="#${emp.empno}"> ${emp.name}
 							</a>
 
 						</div>
 						<!-- 아코디언 헤더  end -->
 						<!-- 아코디언 바디 start -->
-						<div id="${emp.key}" class="collapse" data-parent="#accordion">
+						<div id="${emp.empno}" class="collapse" data-parent="#accordion">
 							<div class="card-body">
 								<!-- 사원 아이디, 연락처 정보 start-->
 								<div class="emp-info">
 									<div>
-										<span><strong>사원 아이디 :</strong> ${emp.key}</span><strong>연락처
-											: </strong> ${emp.value.phone}<span></span>
+										<span><strong>사원 아이디 :</strong> ${emp.empno}</span><strong>연락처
+											: </strong> ${emp.phone}<span></span>
 									</div>
 
 
@@ -84,11 +84,11 @@
 								<!-- 사원 아이디, 연락처 정보 end-->
 								<!-- 사원 업무 todos start -->
 								<div class="emp-task">
-									<h4>담당 업무 - ${emp.value.task}</h4>
+									<h4>담당 업무 - ${emp.task}</h4>
 									<!-- 작업목록 editor start -->
 
 									<div class="todoTool">
-										<div class="editTodoBtn" title="${emp.key}">
+										<div class="editTodoBtn" title="${emp.empno}">
 											작업 목록 editor <span> <svg
 													xmlns="http://www.w3.org/2000/svg" width="16" height="16"
 													fill="currentColor" class="bi bi-caret-right-fill"
@@ -102,11 +102,6 @@
 									</div>
 									<!-- 작업목록 editor end -->
 									<!-- 작업목록 리스트 start -->
-									<ul class="emp-todo">
-										<c:forEach var="todo" items="${emp.value.todoList}">
-											<li>${todo}</li>
-										</c:forEach>
-									</ul>
 									<!-- 작업목록 리스트 end -->
 								</div>
 								<!-- 사원 업무 todos end-->

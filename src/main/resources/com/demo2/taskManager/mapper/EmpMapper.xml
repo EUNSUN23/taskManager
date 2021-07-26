@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.demo2.taskManager.mapper.EmpMapper">
+<select id="getEmps" resultType="com.demo2.taskManager.board.domain.EmpVO">
+<![CDATA[select * from tbl_emp]]>
+</select>
+
+<insert id="addEmp">
+insert into tbl_emp (empno, name, phone, task) values (#{empno}, #{name}, #{phone}, #{task})
+</insert>
+
+<delete id="deleteEmp">
+delete from tbl_emp where empno = #{empno}
+</delete>
+
+<update id="updateEmp">
+update tbl_emp 
+set name = #{name}, phone= #{phone}, task= #{task}
+where empno = #{empno}
+</update>
+</mapper>

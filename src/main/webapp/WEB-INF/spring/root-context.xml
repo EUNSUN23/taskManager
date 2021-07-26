@@ -13,15 +13,10 @@
   http://www.springframework.org/schema/context/spring-context-4.3.xsd">
 
 <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">
-<!--
-<property name="driverClassName" value="oracle.jdbc.driver.OracleDriver"/>
-<property name="jdbcUrl" value="jdbc:oracle:thin:@localhost:1521:XE"/>
--->
 <property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy"/>
 <property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@localhost:1521:XE"/>
-
-<property name="username" value="emp_ex"/>
-<property name="password" value="emp_ex"/>
+<property name="username" value="system"/>
+<property name="password" value="root"/>
 </bean>
 
 <!-- HikariCP configuration -->
@@ -44,5 +39,5 @@
 </bean> 
 
 <mybatis-spring:scan base-package="com.demo2.taskManager.mapper"/>
-<context:component-scan base-package="com.demo2.*"></context:component-scan>
+<context:component-scan base-package="com.demo2.taskManager.*"></context:component-scan>
 </beans>

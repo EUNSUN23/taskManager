@@ -12,7 +12,7 @@
 	</settings>
 
 	<typeAliases>
-		<typeAlias alias="boardVO"
-			type="com.demo2.taskManager.board.domain.BoardVO" />
+		<typeAlias alias="empVO"
+			type="com.demo2.taskManager.board.domain.EmpVO" />
 	</typeAliases>
 </configuration>
