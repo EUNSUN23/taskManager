@@ -116,12 +116,10 @@
 }
 
 .editTodoBtn {
-	margin: 0 1px;
+	font-weight:bold;
+	margin: 10px 0 1px 0;
 	cursor: pointer;
+	color:yellowgreen;
+	border:1px solid black;
 	
-}
-
-
-.todoTool{
-	margin-top:10px;
 }

@@ -5,6 +5,9 @@ const deleteContainer = document.querySelectorAll(".emp-delete-container");
 const submitDelete = document.querySelector("#submitDelete");
 const deleteChecker = document.querySelectorAll(".deleteCheck");
 const empListHeader = document.querySelectorAll(".list-group-item");
+const editTodoBtn = document.querySelectorAll(".editTodoBtn");
+const editTodoModal = document.querySelector("#myModal-todoEditor");
+
 
 for(let j = 0; j<empListHeader.length; j++){
 	const empHeader = empListHeader[j];
@@ -16,6 +19,8 @@ for(let j = 0; j<empListHeader.length; j++){
 		}
 	})
 }
+
+
 
 
 const initDeleteCheck = () => {
@@ -43,3 +48,8 @@ deleteEmp.addEventListener("click", function(e) {
 	}
 
 });
+
+
+
+
+

@@ -5,6 +5,7 @@ import java.util.*;
 public class EmpDataUtil {
 
 	public static Map<String, Employee> empMap = new HashMap<>();
+	public static List<String> ids = new ArrayList<>();
 
 
 	static {
@@ -24,11 +25,18 @@ public class EmpDataUtil {
 
 	}
 
-	/*------------ 직원 추가 -------------- */
+	/*------------ 추가 : 직원,todo -------------- */
 
 	public static void addEmployee(String empNo, String name, String phone, String task, String todo) {
 
+		if(validateId(empNo)) {
 			empMap.put(empNo, new Employee(empNo, name, phone, task, todo));
+			ids.add(empNo);
+		}else {
+			System.out.println("이미 존재하는 아이디 입니다");
+			return;
+		}
+			
 		
 
 	}
@@ -36,9 +44,19 @@ public class EmpDataUtil {
 	public static void addEmployee(String empNo, String name, String phone, String task) {
 		System.out.println("EmpDataUtil,empNo : "+empNo);
 	
+		if(validateId(empNo)) {
 			empMap.put(empNo, new Employee(empNo, name, phone, task));
-		
+			ids.add(empNo);
+		}else {
+			System.out.println("이미 존재하는 아이디 입니다");
+			return;
+		}
 
+	}
+	
+	
+	public static void addEmpTodo(String empNo, String newTodo) {
+		empMap.get(empNo).addTodo(newTodo);
 	}
 
 	/*------------ 직원  수정 : info, todo  -------------- */
@@ -51,14 +69,37 @@ public class EmpDataUtil {
 		empMap.get(empNo).reviseTodo(idx, newTodo);
 	}
 
-	/*------------ 직원 삭제 -------------- */
+	/*------------ 삭제 : 직원, todo -------------- */
 
 	public static void deleteEmployee(String empNo) {
 		empMap.remove(empNo);
 	}
+	
+	public static void deleteEmpTodo(String empNo, int idx) {
+		empMap.get(empNo).deleteTodo(idx);
+	}
 
 	/*------------ id 중복체크 ------------- */
 
+	public static boolean validateId(String id) {
+		
+		boolean pass = true; 
+		
+		System.out.println("ids :"+ ids.toString());
+		System.out.println("indexof id : "+ ids.indexOf(id));
+		
+		
+		
+		
+		
+		if(ids.indexOf(id)>=0) {
+			pass = false;
+		}
+		
+		
+		
+		return pass;
+	}
 
 
 }

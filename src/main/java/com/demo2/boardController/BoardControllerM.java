@@ -14,7 +14,7 @@ import org.springframework.web.servlet.ModelAndView;
 
 @Controller
 @RequestMapping("/board")
-public class BoardController {
+public class BoardControllerM {
 
 	@GetMapping("")
 	public ModelAndView reqBoard(HttpServletRequest request) {
@@ -55,7 +55,7 @@ public class BoardController {
 
 		EmpDataUtil.reviseEmpInf(empNo, name, phone, task);
 			
-		System.out.println("empMap: "+EmpDataUtil.empMap.toString());
+		System.out.println("empMap: "+EmpDataUtil.empMap);
 
 		mavPost.addObject("employeeData", EmpDataUtil.empMap);
 		mavPost.addObject("id", id);
@@ -88,6 +88,56 @@ public class BoardController {
 		
 		return mavPost;
 	}
+	
+	
+	@PostMapping("/add-todo")
+	public ModelAndView addEmpTodo(HttpServletRequest request) {
+		
+		ModelAndView mavPost = new ModelAndView();
+		HttpSession session = request.getSession();
+		// 찾아야할 jsp 정보 세팅
+		
+		String empNo = request.getParameter("empNo");
+		String id = (String)session.getAttribute("id");
+		String todoText = request.getParameter("todoText");
+		
+		EmpDataUtil.addEmpTodo(empNo, todoText);
+		
+		mavPost.addObject("employeeData", EmpDataUtil.empMap);
+		mavPost.addObject("id", id);
+		
+		mavPost.setViewName("board");
+
+		// jsp에서 사용할 데이터 세팅 -> request에 담긴다.
+		
+		return mavPost;
+		
+	}
+	
+	
+	@PostMapping("/delete-todo")
+	public ModelAndView deleteEmpTodo(HttpServletRequest request) {
+		
+		ModelAndView mavPost = new ModelAndView();
+		HttpSession session = request.getSession();
+		// 찾아야할 jsp 정보 세팅
+		
+		String empNo = request.getParameter("empNo");
+		String id = (String)session.getAttribute("id");
+		int todoIdx = Integer.parseInt(request.getParameter("todoIdx"));
+		
+		EmpDataUtil.deleteEmpTodo(empNo, todoIdx);
+		
+		mavPost.addObject("employeeData", EmpDataUtil.empMap);
+		mavPost.addObject("id", id);
+		
+		mavPost.setViewName("board");
+
+		// jsp에서 사용할 데이터 세팅 -> request에 담긴다.
+		
+		return mavPost;
+	}
+	
 	
 	
 	@PostMapping("/delete-emp")
