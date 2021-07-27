@@ -9,11 +9,15 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.demo2.taskManager.board.domain.EmpVO;
 import com.demo2.taskManager.board.service.EmpService;
+import com.google.gson.Gson;
 
 import lombok.Setter;
 import lombok.extern.log4j.Log4j;
@@ -43,31 +47,17 @@ public class BoardController {
 		return mav1;
 	}
 	
-	
+	@ResponseBody
 	@PostMapping("/delete-emp")
-	public ModelAndView deleteBoard(HttpServletRequest request) {
-		
-		ModelAndView mavPost = new ModelAndView();
-		HttpSession session = request.getSession();
-		// 찾아야할 jsp 정보 세팅
-		mavPost.setViewName("board");
-
-		// jsp에서 사용할 데이터 세팅 -> request에 담긴다.
-
-		
-		String id = (String)session.getAttribute("id");
-		String[] empNos = request.getParameterValues("empNo");
-		
-		for(int i = 0; i<empNos.length; i++) {
-			service.deleteEmp(empNos[i]);
+	public List<EmpVO> deleteBoard(@RequestParam("empNos") String[] deleteArr) {
+	
+		log.info("deleteArr:"+deleteArr);
+		String[] splitArr = deleteArr[0].split("&");
+		for(int i = 0; i<splitArr.length; i++) {
+			service.deleteEmp(splitArr[i].replace("empNo=",""));
 		}
-		
 
-		mavPost.addObject("employeeData", service.getEmps());
-		mavPost.addObject("id",id);
-		
-
-		return mavPost;
+		return service.getEmps();
 	}
 	
 	

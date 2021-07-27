@@ -40,8 +40,7 @@
 		</div>
 		<!-- 프로젝트 보드 header end -->
 		<!-- 프로젝트 보드 body start -->
-		<form action="${pageContext.request.contextPath}/board/delete-emp"
-			method="post" id="emp-board">
+		<form id="emp-board">
 			<!-- 멤버 삭제 버튼 start -->
 			<button type="submit" id="submitDelete">
 				<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16"
